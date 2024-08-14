@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React, { useContext } from 'react';
+import WalletConnection from './WalletConnection';
+import { WalletContext } from './WalletContext';
 
 function App() {
+  const { walletAddress } = useContext(WalletContext);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Crypto Portfolio App</h1>
+      <WalletConnection setWalletAddress={useContext(WalletContext).setWalletAddress} />
+      {walletAddress && (
+        <div>
+          <h2>Connected Wallet Address:</h2>
+          <p>{walletAddress}</p>
+        </div>
+      )}
     </div>
   );
 }
