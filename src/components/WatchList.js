@@ -1,43 +1,66 @@
 // src/components/WatchList.js
 import React, { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
+import { ethers } from "ethers";
+import { BrowserProvider, Contract } from "ethers";
+// import { formatEther } from "ethers";
 import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 
 const WatchList = () => {
   const [tokenAddress, setTokenAddress] = useState('');
   const [watchList, setWatchList] = useState([]);
-  
+  const [loading, setLoading] = useState(false);
+
   // Fetch the watchlist from Firestore on component mount
   useEffect(() => {
     const fetchWatchList = async () => {
-      const querySnapshot = await getDocs(collection(db, 'tokens'));
-      const tokens = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setWatchList(tokens);
+      setLoading(true);
+      try {
+        const querySnapshot = await getDocs(collection(db, 'tokens'));
+        const tokens = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setWatchList(tokens);
+      } catch (error) {
+        console.error('Error fetching watchlist:', error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchWatchList();
   }, []);
 
   // Function to fetch token balance
   const getTokenBalance = async (address) => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const tokenContract = new ethers.Contract(address, [
-      // ABI: only include the balanceOf function
-      'function balanceOf(address owner) view returns (uint256)'
-    ], provider);
+    try {
+      const provider = new BrowserProvider(window.ethereum);
+      const tokenContract = new Contract(address, [
+        // ABI: only include the balanceOf function
+        'function balanceOf(address owner) view returns (uint256)'
+      ], provider);
 
-    const signer = provider.getSigner();
-    const balance = await tokenContract.balanceOf(await signer.getAddress());
-    return ethers.utils.formatEther(balance);
+      const signer = provider.getSigner();
+      const balance = await tokenContract.balanceOf(await signer.getAddress());
+      return ethers.formatEther(balance);
+    } catch (error) {
+      console.error('Error fetching token balance:', error);
+      throw new Error('Unable to fetch token balance');
+    }
   };
 
   // Function to add a token to the watchlist
-  const addToken = async () => {
-    if (!ethers.utils.isAddress(tokenAddress)) {
+  // Function to add a token to the watchlist
+const addToken = async () => {
+    if (!ethers.isAddress(tokenAddress)) {
       alert('Please enter a valid Ethereum address');
       return;
     }
-
+  
+    // Check if token is already in the watchlist
+    if (watchList.some(token => token.address === tokenAddress)) {
+      alert('Token is already in your watchlist');
+      return;
+    }
+  
+    setLoading(true);
     try {
       const balance = await getTokenBalance(tokenAddress);
       const newToken = { address: tokenAddress, balance };
@@ -48,16 +71,24 @@ const WatchList = () => {
       setTokenAddress('');
     } catch (error) {
       console.error('Error adding token:', error);
+      alert('There was an error adding the token. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
+  
 
   // Function to remove a token from the watchlist
   const removeToken = async (id) => {
+    setLoading(true);
     try {
       await deleteDoc(doc(db, 'tokens', id));
       setWatchList(watchList.filter(token => token.id !== id));
     } catch (error) {
       console.error('Error removing token:', error);
+      alert('There was an error removing the token. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -69,17 +100,26 @@ const WatchList = () => {
         placeholder="Enter Token Contract Address" 
         value={tokenAddress} 
         onChange={(e) => setTokenAddress(e.target.value)} 
+        disabled={loading}
       />
-      <button onClick={addToken}>Add Token</button>
+      <button onClick={addToken} disabled={loading}>
+        {loading ? 'Adding...' : 'Add Token'}
+      </button>
       
-      <ul>
-        {watchList.map(token => (
-          <li key={token.id}>
-            <span>{token.address} - Balance: {token.balance} ETH</span>
-            <button onClick={() => removeToken(token.id)}>Remove</button>
-          </li>
-        ))}
-      </ul>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <ul>
+          {watchList.map(token => (
+            <li key={token.id}>
+              <span>{token.address} - Balance: {token.balance} ETH</span>
+              <button onClick={() => removeToken(token.id)} disabled={loading}>
+                {loading ? 'Removing...' : 'Remove'}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
