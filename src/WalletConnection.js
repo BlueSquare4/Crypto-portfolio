@@ -29,16 +29,17 @@ const WalletConnection = ({ setWalletAddress }) => {
   };
 
   return (
-    <div>
-      <Button variant="outline-danger"  onClick={connectWallet}>Connect MetaMask</Button>
-      <div>
+    <div className='mt-3'>
+      <h2>Connect Wallet</h2>
+      <Button variant="outline-danger" size="sm" onClick={connectWallet}>Connect MetaMask</Button>
+      <div className="mt-2">
         <input
           type="text"
           placeholder="Enter wallet address"
           value={inputAddress}
           onChange={handleInputChange}
         />
-        <Button variant="outline-info" onClick={handleManualInput}>Set Address</Button>
+        <Button variant="outline-info" size="sm" onClick={handleManualInput}>Set Address</Button>
       </div>
     </div>
   );

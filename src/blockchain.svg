@@ -1,0 +1,93 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" id="crypto-network">
+  <!-- Block for BTC -->
+  <rect x="10" y="10" width="60" height="60" fill="#f7931a" />
+  <text x="40" y="45" font-size="16" text-anchor="middle" fill="#fff">BTC</text>
+
+  <!-- Block for ETH -->
+  <rect x="130" y="10" width="60" height="60" fill="#3c3c3d" />
+  <text x="160" y="45" font-size="16" text-anchor="middle" fill="#fff">ETH</text>
+
+  <!-- Block for LTC -->
+  <rect x="10" y="130" width="60" height="60" fill="#a3da77" />
+  <text x="40" y="165" font-size="16" text-anchor="middle" fill="#fff">LTC</text>
+
+  <!-- Block for XRP -->
+  <rect x="130" y="130" width="60" height="60" fill="#00aae4" />
+  <text x="160" y="165" font-size="16" text-anchor="middle" fill="#fff">XRP</text>
+
+  <!-- Connecting Dots -->
+  <!-- Top Horizontal Line -->
+  <line x1="70" y1="40" x2="130" y2="40" stroke="none" />
+  <circle cx="70" cy="40" r="3" fill="#fff">
+    <animateMotion dur="2s" repeatCount="indefinite">
+      <mpath href="#top-line" />
+    </animateMotion>
+  </circle>
+  <circle cx="100" cy="40" r="3" fill="#fff">
+    <animateMotion dur="2s" repeatCount="indefinite">
+      <mpath href="#top-line" />
+    </animateMotion>
+  </circle>
+  <circle cx="130" cy="40" r="3" fill="#fff">
+    <animateMotion dur="2s" repeatCount="indefinite">
+      <mpath href="#top-line" />
+    </animateMotion>
+  </circle>
+
+  <!-- Left Vertical Line -->
+  <line x1="40" y1="70" x2="40" y2="130" stroke="none" />
+  <circle cx="40" cy="70" r="3" fill="#fff">
+    <animateMotion dur="2s" repeatCount="indefinite">
+      <mpath href="#left-line" />
+    </animateMotion>
+  </circle>
+  <circle cx="40" cy="100" r="3" fill="#fff">
+    <animateMotion dur="2s" repeatCount="indefinite">
+      <mpath href="#left-line" />
+    </animateMotion>
+  </circle>
+  <circle cx="40" cy="130" r="3" fill="#fff">
+    <animateMotion dur="2s" repeatCount="indefinite">
+      <mpath href="#left-line" />
+    </animateMotion>
+  </circle>
+
+  <!-- Bottom Horizontal Line -->
+  <line x1="70" y1="160" x2="130" y2="160" stroke="none" />
+  <circle cx="70" cy="160" r="3" fill="#fff">
+    <animateMotion dur="2s" repeatCount="indefinite">
+      <mpath href="#bottom-line" />
+    </animateMotion>
+  </circle>
+  <circle cx="100" cy="160" r="3" fill="#fff">
+    <animateMotion dur="2s" repeatCount="indefinite">
+      <mpath href="#bottom-line" />
+    </animateMotion>
+  </circle>
+  <circle cx="130" cy="160" r="3" fill="#fff">
+    <animateMotion dur="2s" repeatCount="indefinite">
+      <mpath href="#bottom-line" />
+    </animateMotion>
+  </circle>
+
+  <!-- Right Vertical Line -->
+  <line x1="160" y1="70" x2="160" y2="130" stroke="none" />
+  <circle cx="160" cy="70" r="3" fill="#fff">
+    <animateMotion dur="2s" repeatCount="indefinite">
+      <mpath href="#right-line" />
+    </animateMotion>
+  </circle>
+  <circle cx="160" cy="100" r="3" fill="#fff">
+    <animateMotion dur="2s" repeatCount="indefinite">
+      <mpath href="#right-line" />
+    </animateMotion>
+  </circle>
+  <circle cx="160" cy="130" r="3" fill="#fff">
+    <animateMotion dur="2s" repeatCount="indefinite">
+      <mpath href="#right-line" />
+    </animateMotion>
+  </circle>
+
+  <!-- Central Text -->
+  <text x="100" y="100" font-size="24" text-anchor="middle" fill="#fff">AJ</text>
+</svg>

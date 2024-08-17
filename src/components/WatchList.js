@@ -1,7 +1,7 @@
 // src/components/WatchList.js
 import React, { useState, useEffect } from 'react';
-import { ethers } from "ethers";
-import { BrowserProvider, Contract } from "ethers";
+import { ethers } from 'ethers';
+import { BrowserProvider,Web3Provider, Contract } from 'ethers';
 import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 
@@ -46,15 +46,11 @@ const WatchList = ({ onSelectToken }) => {
 
   // Function to add a token to the watchlist
   const addToken = async () => {
-    console.log('Address to validate:', tokenAddress); // Debugging line
-    
-    // Validate the address
     if (!ethers.isAddress(tokenAddress)) {
       alert('Please enter a valid Ethereum address');
       return;
     }
   
-    // Check if token is already in the watchlist
     if (watchList.some(token => token.address === tokenAddress)) {
       alert('Token is already in your watchlist');
       return;
@@ -65,7 +61,6 @@ const WatchList = ({ onSelectToken }) => {
       const balance = await getTokenBalance(tokenAddress);
       const newToken = { address: tokenAddress, balance };
   
-      // Add token to Firebase
       const docRef = await addDoc(collection(db, 'tokens'), newToken);
       setWatchList([...watchList, { id: docRef.id, ...newToken }]);
       setTokenAddress('');
@@ -76,7 +71,6 @@ const WatchList = ({ onSelectToken }) => {
       setLoading(false);
     }
   };
-  
 
   // Function to remove a token from the watchlist
   const removeToken = async (id) => {
@@ -102,7 +96,7 @@ const WatchList = ({ onSelectToken }) => {
       <h2>Token Watch List</h2>
       <input 
         type="text" 
-        placeholder="Enter Token Contract Address" 
+        placeholder="Token Contract Address" 
         value={tokenAddress} 
         onChange={(e) => setTokenAddress(e.target.value)} 
         disabled={loading}
