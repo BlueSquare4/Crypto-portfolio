@@ -1,7 +1,7 @@
 // src/components/WatchList.js
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import { BrowserProvider,Web3Provider, Contract } from 'ethers';
+import { BrowserProvider, Contract } from 'ethers';
 import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 
