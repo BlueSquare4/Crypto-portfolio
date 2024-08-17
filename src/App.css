@@ -1,4 +1,21 @@
-.App {
+.connectadd{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* height: 100vh; */
+}
+
+.connect-wallet{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +52,5 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
+

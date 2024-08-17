@@ -2,11 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from "ethers";
 import { BrowserProvider, Contract } from "ethers";
-// import { formatEther } from "ethers";
 import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 
-const WatchList = () => {
+const WatchList = ({ onSelectToken }) => {
   const [tokenAddress, setTokenAddress] = useState('');
   const [watchList, setWatchList] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -33,7 +32,6 @@ const WatchList = () => {
     try {
       const provider = new BrowserProvider(window.ethereum);
       const tokenContract = new Contract(address, [
-        // ABI: only include the balanceOf function
         'function balanceOf(address owner) view returns (uint256)'
       ], provider);
 
@@ -47,8 +45,10 @@ const WatchList = () => {
   };
 
   // Function to add a token to the watchlist
-  // Function to add a token to the watchlist
-const addToken = async () => {
+  const addToken = async () => {
+    console.log('Address to validate:', tokenAddress); // Debugging line
+    
+    // Validate the address
     if (!ethers.isAddress(tokenAddress)) {
       alert('Please enter a valid Ethereum address');
       return;
@@ -64,7 +64,7 @@ const addToken = async () => {
     try {
       const balance = await getTokenBalance(tokenAddress);
       const newToken = { address: tokenAddress, balance };
-      
+  
       // Add token to Firebase
       const docRef = await addDoc(collection(db, 'tokens'), newToken);
       setWatchList([...watchList, { id: docRef.id, ...newToken }]);
@@ -92,6 +92,11 @@ const addToken = async () => {
     }
   };
 
+  // Handle token selection
+  const handleSelectToken = (address) => {
+    onSelectToken(address);
+  };
+
   return (
     <div>
       <h2>Token Watch List</h2>
@@ -113,6 +118,9 @@ const addToken = async () => {
           {watchList.map(token => (
             <li key={token.id}>
               <span>{token.address} - Balance: {token.balance} ETH</span>
+              <button onClick={() => handleSelectToken(token.address)} disabled={loading}>
+                View Historical Data
+              </button>
               <button onClick={() => removeToken(token.id)} disabled={loading}>
                 {loading ? 'Removing...' : 'Remove'}
               </button>

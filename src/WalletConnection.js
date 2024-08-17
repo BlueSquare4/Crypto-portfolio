@@ -1,6 +1,5 @@
-// src/WalletConnection.js
 import React, { useState } from 'react';
-import { ethers } from 'ethers';
+import Button from 'react-bootstrap/Button';
 
 const WalletConnection = ({ setWalletAddress }) => {
   const [inputAddress, setInputAddress] = useState('');
@@ -31,7 +30,7 @@ const WalletConnection = ({ setWalletAddress }) => {
 
   return (
     <div>
-      <button onClick={connectWallet}>Connect MetaMask</button>
+      <Button variant="outline-danger"  onClick={connectWallet}>Connect MetaMask</Button>
       <div>
         <input
           type="text"
@@ -39,7 +38,7 @@ const WalletConnection = ({ setWalletAddress }) => {
           value={inputAddress}
           onChange={handleInputChange}
         />
-        <button onClick={handleManualInput}>Set Address</button>
+        <Button variant="outline-info" onClick={handleManualInput}>Set Address</Button>
       </div>
     </div>
   );
