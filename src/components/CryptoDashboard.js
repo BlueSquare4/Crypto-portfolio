@@ -11,6 +11,7 @@ const CryptoDashboard = () => {
   const [selectedToken, setSelectedToken] = useState('bitcoin'); // Default to Bitcoin
   const [cryptoList, setCryptoList] = useState([]);
 
+  // Fetch the list of cryptocurrencies once on component mount
   useEffect(() => {
     const fetchCryptoList = async () => {
       try {
@@ -24,38 +25,42 @@ const CryptoDashboard = () => {
     fetchCryptoList();
   }, []);
 
+  // Fetch the price data whenever the selected token changes
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`https://api.coingecko.com/api/v3/coins/${selectedToken}/market_chart?vs_currency=usd&days=30`);
+        const prices = response.data.prices;
+        const labels = prices.map(price => new Date(price[0]).toLocaleDateString());
+        const values = prices.map(price => price[1]);
+
+        setData({
+          labels: labels,
+          datasets: [
+            {
+              label: 'Price in USD',
+              data: values,
+              borderColor: 'rgba(0, 123, 255, 0.8)',
+              backgroundColor: 'rgba(0, 123, 255, 0.2)',
+              fill: true
+            }
+          ]
+        });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
     if (selectedToken) {
-      const fetchData = async () => {
-        try {
-          const response = await axios.get(`https://api.coingecko.com/api/v3/coins/${selectedToken}/market_chart?vs_currency=usd&days=30`);
-          const prices = response.data.prices;
-          const labels = prices.map(price => new Date(price[0]).toLocaleDateString());
-          const values = prices.map(price => price[1]);
-
-          setData({
-            labels: labels,
-            datasets: [
-              {
-                label: 'Price in USD',
-                data: values,
-                borderColor: 'rgba(0, 123, 255, 0.8)',
-                backgroundColor: 'rgba(0, 123, 255, 0.2)',
-                fill: true
-              }
-            ]
-          });
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-
       fetchData();
     }
   }, [selectedToken]);
 
   const handleSelectChange = (event) => {
-    setSelectedToken(event.target.value);
+    const newToken = event.target.value;
+    if (newToken !== selectedToken) {
+      setSelectedToken(newToken);
+    }
   };
 
   return (
