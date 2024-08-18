@@ -21,6 +21,17 @@
   z-index: 1000;
 }
 
+.crypto-header {
+  display: flex;
+  align-items: center;
+}
+
+.rotating-svg {
+  width: 150px;  /* Adjust the size as needed */
+  height: 150px; /* Adjust the size as needed */
+  margin-left: 0px;
+
+}
 
 
 

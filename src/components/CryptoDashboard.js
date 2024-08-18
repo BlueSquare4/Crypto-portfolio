@@ -1,6 +1,8 @@
 // src/components/CryptoDashboard.js
+import '../App.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import dollarSvg from '../dollar.svg';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Legend } from 'chart.js';
 
@@ -124,7 +126,10 @@ const CryptoDashboard = () => {
       )}
 
 
+      <div className="crypto-header">
       <h4>Recent News Related to {selectedToken.toUpperCase()}</h4>
+      <img src={dollarSvg} alt="Rotating Dollar Sign" className="rotating-svg" />
+    </div>
       <div style={{
         border: '1px solid #ccc',
         padding: '10px',
