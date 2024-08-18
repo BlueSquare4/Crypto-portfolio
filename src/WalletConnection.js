@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import './WalletConnection.css'; // Import CSS for styling
-import walletImage from './assets/images/bcw.jpg'; // Update with the path to your image
+// import walletImage from './assets/images/bcw.jpg'; // Update with the path to your image
 
 const WalletConnection = ({ setWalletAddress }) => {
   const [inputAddress, setInputAddress] = useState('');

@@ -7,17 +7,17 @@ import { WalletContext } from './WalletContext';
 import WatchList from './components/WatchList';
 import CryptoDashboard from './components/CryptoDashboard';
 import { ReactComponent as WalletIcon } from './wallet.svg';
-import CryptoGuide from './components/CryptoGuide'; 
-// import { ReactComponent as BlockchainIcon } from './blockchain.svg';
+import CryptoGuide from './components/CryptoGuide';
 import InteractiveSVG from './components/InteractiveSVG'; // Import InteractiveSVG
+import TokenTransfer from './components/TokenTransfer'; // Import TokenTransfer component
 
 function App() {
-  const { walletAddress, setWalletAddress } = useContext(WalletContext);
+  const { walletAddress, setWalletAddress, contract } = useContext(WalletContext);
   const [selectedToken, setSelectedToken] = useState(null);
 
   return (
     <div className="App">
-    <header>
+      <header>
         <h1 className="app-heading">Welcome to MyCrypto Wallet 🪙</h1>
       </header>
 
@@ -45,6 +45,9 @@ function App() {
               <WatchList onSelectToken={setSelectedToken} />
             </div>
             <CryptoDashboard selectedToken={selectedToken} />
+            <div className="mb-4">
+              <TokenTransfer contract={contract} /> {/* Add the TokenTransfer component */}
+            </div>
           </div>
         )}
       </div>

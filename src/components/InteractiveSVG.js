@@ -51,8 +51,8 @@ const InteractiveSVG = () => {
           y="10"
           width="230"
           height="80"
-          fill="#f4a261"
-          stroke="#e76f51"
+          fill="#2992e8"
+          stroke="#634667"
           strokeWidth="2"
           onClick={handleClick}
         />
