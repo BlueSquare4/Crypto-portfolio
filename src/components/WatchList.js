@@ -12,7 +12,7 @@ const WatchList = ({ onSelectToken }) => {
   const [balanceInfo, setBalanceInfo] = useState('ETH - 0 tokens');
 
   // Function to get the network name
-  const getNetworkName = async () => {
+  const getNetworkName = useCallback(async () => {
     try {
       const provider = new BrowserProvider(window.ethereum);
       const network = await provider.getNetwork();
@@ -21,10 +21,10 @@ const WatchList = ({ onSelectToken }) => {
       console.error('Error fetching network:', error);
       return 'unknown';
     }
-  };
+  }, []);
 
   // Function to fetch token balance
-  const getTokenBalance = async (address) => {
+  const getTokenBalance = useCallback(async (address) => {
     try {
       const provider = new BrowserProvider(window.ethereum);
       const tokenContract = new Contract(address, [
@@ -38,7 +38,7 @@ const WatchList = ({ onSelectToken }) => {
       console.error('Error fetching token balance:', error);
       return '0';
     }
-  };
+  }, []);
 
   // Update balance information
   const updateBalanceInfo = useCallback(async (tokens) => {
