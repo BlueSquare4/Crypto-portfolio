@@ -8,7 +8,6 @@ const WatchList = ({ onSelectToken }) => {
   const [tokenAddress, setTokenAddress] = useState('');
   const [watchList, setWatchList] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [network, setNetwork] = useState('');
   const [balanceInfo, setBalanceInfo] = useState('ETH - 0 tokens');
 
   // Function to get the network name
@@ -43,12 +42,11 @@ const WatchList = ({ onSelectToken }) => {
   // Update balance information
   const updateBalanceInfo = useCallback(async (tokens) => {
     if (tokens.length === 0) {
-      setBalanceInfo(`ETH - 0 tokens`);
+      setBalanceInfo('ETH - 0 tokens');
       return;
     }
     
     const networkName = await getNetworkName();
-    setNetwork(networkName);
 
     let totalBalance = 0;
     for (const token of tokens) {
