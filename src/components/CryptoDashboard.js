@@ -133,7 +133,7 @@ const CryptoDashboard = () => {
       <div style={{
         border: '1px solid #ccc',
         padding: '10px',
-        marginTop: '20px',
+        marginTop: '5px',
         height: '300px',
         width: '700px', // Fixed height
         overflowY: 'auto' // Enable vertical scrolling

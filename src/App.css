@@ -12,6 +12,14 @@
   justify-content: center;
 }
 
+.app-heading {
+  text-align: center; /* Center align the heading */
+  font-size: 2rem; /* Adjust font size */
+  color: #fff; /* Text color to stand out against the background */
+  margin: 20px 0; /* Space above and below the heading */
+  font-weight: bold; /* Bold text */
+}
+
 #blockchain-svg {
   position: fixed;
   top: 10px;
@@ -19,6 +27,9 @@
   width: 200px;
   height: 200px;
   z-index: 1000;
+  background-color: black; /* Ensure the background is consistent with the rest of your design */
+  border: 1px solid #333; /* Optional: Add a subtle border to distinguish the SVG from the background */
+  padding: 10px; 
 }
 
 .crypto-header {

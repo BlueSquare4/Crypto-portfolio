@@ -1,4 +1,3 @@
-// src/App.js
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -8,7 +7,9 @@ import { WalletContext } from './WalletContext';
 import WatchList from './components/WatchList';
 import CryptoDashboard from './components/CryptoDashboard';
 import { ReactComponent as WalletIcon } from './wallet.svg';
-import { ReactComponent as BlockchainIcon } from './blockchain.svg';
+import CryptoGuide from './components/CryptoGuide'; 
+// import { ReactComponent as BlockchainIcon } from './blockchain.svg';
+import InteractiveSVG from './components/InteractiveSVG'; // Import InteractiveSVG
 
 function App() {
   const { walletAddress, setWalletAddress } = useContext(WalletContext);
@@ -16,7 +17,13 @@ function App() {
 
   return (
     <div className="App">
-      <BlockchainIcon id="blockchain-svg" /> {/* Blockchain SVG animation */}
+    <header>
+        <h1 className="app-heading">Welcome to MyCrypto Wallet 🪙</h1>
+      </header>
+
+      {/* <BlockchainIcon id="blockchain-svg" /> Blockchain SVG animation */}
+      <InteractiveSVG /> {/* Include InteractiveSVG component */}
+      <CryptoGuide />
       <div className="connectadd">
         {!walletAddress ? (
           <div className="d-flex align-items-center">

@@ -1,0 +1,39 @@
+/* src/components/CryptoGuide.css */
+
+.crypto-guide {
+    background-image: url('/src/assets/images/bcw.jpg'); 
+    background-blend-mode: color;
+    background-size: cover;
+    background-position: center;
+    color: #fff; /* Text color to stand out against the background */
+    padding: 20px;
+    border-radius: 8px;
+    width: 250px; /* Fixed width for the rectangular shape */
+    height: 80vh; /* Fixed height, adjust as needed */
+    max-height: 80vh; /* Ensure it does not exceed viewport height */
+    overflow-y: hidden; /* Enable vertical scrolling */
+    position: absolute; /* Fixed position on the left side */
+    left: 10px; /* Space from the left edge */
+    top: 250px; /* Space from the top edge */
+    text-align: left;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); /* Shadow for better visibility */
+  }
+  
+  .crypto-guide h2 {
+    font-size: 20px; /* Adjust font size for better fit */
+    margin-bottom: 15px;
+  }
+  
+  .crypto-guide ol {
+    font-size: 14px; /* Adjust font size for better readability */
+    line-height: 1.6;
+  }
+  
+  .crypto-guide li {
+    margin-bottom: 8px; /* Reduced margin for compact layout */
+  }
+  
+  .crypto-guide strong {
+    color: #ffcc00; /* Highlight steps */
+  }
+  

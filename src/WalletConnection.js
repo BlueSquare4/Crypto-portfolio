@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import './WalletConnection.css'; // Import CSS for styling
+import walletImage from './assets/images/bcw.jpg'; // Update with the path to your image
 
 const WalletConnection = ({ setWalletAddress }) => {
   const [inputAddress, setInputAddress] = useState('');
@@ -29,17 +31,22 @@ const WalletConnection = ({ setWalletAddress }) => {
   };
 
   return (
-    <div className='mt-3'>
-      <h2>Connect Wallet</h2>
-      <Button variant="outline-danger" size="sm" onClick={connectWallet}>Connect MetaMask</Button>
-      <div className="mt-2">
-        <input
-          type="text"
-          placeholder="Enter wallet address"
-          value={inputAddress}
-          onChange={handleInputChange}
-        />
-        <Button variant="outline-info" size="sm" onClick={handleManualInput}>Set Address</Button>
+    <div className="wallet-connection-container">
+      <div className="heading-container">
+        <h1>Connect Wallet</h1>
+        {/* <img src={walletImage} alt="Wallet" className="wallet-image" /> */}
+      </div>
+      <div className="connection-box">
+        <Button variant="outline-danger" size="sm" onClick={connectWallet}>Connect MetaMask</Button>
+        <div className="manual-input">
+          <input
+            type="text"
+            placeholder="Enter wallet address"
+            value={inputAddress}
+            onChange={handleInputChange}
+          />
+          <Button variant="outline-info" size="sm" onClick={handleManualInput}>Set Address</Button>
+        </div>
       </div>
     </div>
   );
