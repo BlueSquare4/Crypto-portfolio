@@ -56,7 +56,7 @@ const InteractiveSVG = () => {
           strokeWidth="2"
           onClick={handleClick}
         />
-        <text x="125" y="55" fontSize="20" textAnchor="middle" fill="#fff">Famous Cryptocurrency</text>
+        <text x="125" y="55" fontSize="20" textAnchor="middle" fill="#fff">Crypto Facts</text>
       </svg>
       <div style={dropdownStyle} className="dropdown-box">{description}</div>
     </div>
